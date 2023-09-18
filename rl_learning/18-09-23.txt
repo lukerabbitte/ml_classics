@@ -11,3 +11,4 @@ memory and judge that through the history of moves from certain positions using 
 reward associated with that, we can give a highest estimated value based on that one.
 
 - This is a naive approach and I have almost certainly overlooked things.
+
