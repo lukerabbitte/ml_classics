@@ -12,3 +12,21 @@ reward associated with that, we can give a highest estimated value based on that
 
 - This is a naive approach and I have almost certainly overlooked things.
 
+- State space of Gridworld is 10x10.
+
+- Actions draw from a set of 4.
+
+- Rewards are numerical values derived from arriving at certain states.
+
+- Policy is a snapshot of the best action to take at any given state of the simulation.
+
+- Maximise the future discounted reward. Future rewards are worth less than immediate rewards,
+and as such are weighted by multiplying against a coefficient y or gamma.
+
+- Regret as a keyword is the difference between the rewards obtained by the system and the rewards
+that could have been obtained by choosing the best action at each state within the given window.
+
+- Estimated action values can be updated based on the rewards received in the past, but also and very
+importantly according to how many times this action has been taken. For example, if it was taken once
+with a high reward, then this is less valuable than if it was taken many times with a consistently
+high reward.
