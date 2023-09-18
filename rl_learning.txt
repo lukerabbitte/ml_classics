@@ -1,0 +1,13 @@
+- Multi-arm bandit implemented using greedy-epsilon strategy.
+
+- Tuning our probability epsilon dictates the balance between exploration and exploitation.
+
+- Either agent picks random decision, or picks highest estimated value based on past experiences.
+
+- Consider the position of the agent and the direction it takes. If it has moved to a better place,
+it will need to have been rewarded. If it gets rewarded, we should make note of where it started and
+in which direction it moved. In the future, when it finds itself in the same position, we access this
+memory and judge that through the history of moves from certain positions using certain moves, and the
+reward associated with that, we can give a highest estimated value based on that one.
+
+- This is a naive approach and I have almost certainly overlooked things.
