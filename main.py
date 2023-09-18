@@ -4,17 +4,15 @@ import matplotlib.pyplot as plt
 class MultiArmedBandit:
     def __init__(self, num_arms):
         self.num_arms = num_arms
-        self.true_action_values = np.random.randn(num_arms)  # True action values
-        self.estimated_action_values = np.zeros(num_arms)  # Estimated action values
-        self.action_counts = np.zeros(num_arms)  # Action counts
-        self.epsilon = 0.1  # Epsilon for epsilon-greedy strategy
+        self.true_action_values = np.random.randn(num_arms)
+        self.estimated_action_values = np.zeros(num_arms)
+        self.action_counts = np.zeros(num_arms)
+        self.epsilon = 0.1
 
     def choose_action(self):
         if np.random.rand() < self.epsilon:
-            # Choose a random action (exploration)
             return np.random.choice(self.num_arms)
         else:
-            # Choose the action with the highest estimated action value (exploitation)
             return np.argmax(self.estimated_action_values)
 
     def update_action_value(self, action, reward):
@@ -34,12 +32,11 @@ def run_bandit(num_arms, num_steps):
     return rewards
 
 if __name__ == "__main__":
-    num_arms = 5  # Number of arms (actions)
-    num_steps = 500  # Number of steps (time steps)
+    num_arms = 5
+    num_steps = 500
 
     rewards = run_bandit(num_arms, num_steps)
 
-    # Plot the rewards over time
     plt.plot(rewards)
     plt.xlabel('Steps')
     plt.ylabel('Average Reward')
