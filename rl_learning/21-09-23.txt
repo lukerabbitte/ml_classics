@@ -1,0 +1,75 @@
+- When overall loss stops changing or starts changing extremely slowly, we say that the model has converged.
+
+- In linear regression, pick any starting weight for w1. For every one-shot in the experiment, calculate
+the first derivative (slope) to see in which direction we are going where loss is on the y-axis and
+value of weight w1 is on the x-axis. There is only one minimum value - are we approaching or moving
+away from the minimum point of the curve?
+
+- We typically adjust the bias b and the weights w1, w2, etc. at the same time
+
+- Question - how do you go for the next step in your gradient descent function?
+
+- Answer - adjust the learning rate. Each first derivative is a vector which has dir and mag. Multiply
+the magnitude of the vector by the learning rate to get your next increment. Try to hit the goldilocks
+zone by not jumping too far ahead. If you anticipate your loss over weights function to be a flatter
+bowl-shape, then you can be free to make large leaps. If you're completely in the dark about it, or
+expect that your random guesses on the weights of the features required to approach the correct label
+will be far off, then take smaller steps. This affects the training time of the model.
+
+- Regression uses numbers, classification uses text.
+
+- https://www.youtube.com/watch?v=IHZwWFHWa-w
+
+- ^ Video explains how regression performing recognition of handwritten digits works. The data is pre-
+processed (converted to 28x28 data and greyscale). This results in 784 data points.
+
+- Initialise all these data points at random. The last layer of the neural net should have 10 outputs.
+
+- We get garbage. Compute the loss function (difference between the label-dictated actual value and
+the predicted value). This will be garbage at the start. How do we update all 784 weights of our program?
+Answer is to model each run or shot at this experiment.
+
+- Problem: we set our model to random, and fire away. It sucks. We want to update one of our 784 weights.
+Which one to update? These are all independent and what we have is a high-dimension space. We need to
+find a way to survey the loss landscape of all of these weights in relation to the MSE, in order to
+apply our learning rate and progress towards the local minimum.
+
+- The repeated application of a learning rate coefficiengt to our weight value will bring us closer
+to the local minimum. There is a goldilocks zone for this rate which depends on the flatness of the loss
+curve.
+
+- If df/dx, differentiation of function with respect to x, is 9x^2 -12x + 2, we know that at the point x=0,
+the function is positive (2) and is therefore ascending. The magnitude of this constant tells us by how
+much the value is.
+
+- Partial derivation is key in real-world and engineering, where there can be many, many independent
+variables. Is this what stochastic gradient descent is? Where we simply take a small basket of weights,
+test their gradient descent, apply a learning rate to mutiply the weight by to try and fix it, until
+we get to the perfect weight, and then repeat this for every w in the small basket, rather than all 784?
+
+- *Learning rate function is to perform multi-variate calculus that takes a point and find the opposite of
+the gradient, the direction of steepest increase, and how steep it is. We need the rate of change of the
+slope (the steepness) as well as the direction of where it's going (positive or negative).*
+
+- Learning rate function - compute direction of decrease, take a small step in that direction.
+
+- Check image2. If there are only two weights, we can imagine that it can be 2D. We calculate the direction
+to the local minimum, and the steepness of this direction. This is a vector (arrow) that we can apply
+to the current point, to force it towards the local minimum iteratively.
+
+- Likewise, if we have 13000 weights, we can imagine this as a crazy point in an extremely high-dimension
+world. But all we have to do is apply the 'nudge' vector or direction of the decrease arrow, just like
+we did in 2D, and sum this to the existing vector column (bearing in mind that there are values in this
+nudge column vector that could be positive, and values that could be negative).
+
+- So, if we're dealing with like 2 weights at a time, the incremental step of training is nothing more
+than summing the current column vector of 2 points (AKA, a point on a 2D plane), with another column
+vector representing the direction and magnitude of the arrow pointing down the slope towards the local
+minimum. The "magnitude" is captured in the x and y values (in a higher space, we'd simply call these
+the elements of the column vector), and the "direction" is captured in whether the x and y values
+(or elements of the column vector) are positive or negative.
+
+- The 'nudge' column vector contains information for how all elements of the existing column vector
+could be changed to nudge the whole thing towards local minimum. Elements = weights. The magnitude of
+all these elements or weights then tells us which weights are more important. If a certain weight has
+a higher magnitude, it is more consequential to the ultimate output than another.

@@ -1,11 +1,12 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+
 class MultiArmedBandit:
     def __init__(self, num_arms):
         self.num_arms = num_arms
         self.true_action_values = np.random.randn(num_arms)
-        self.estimated_action_values = np.zeros(num_arms)
+        self.estimated_action_values = np.zeros(num_arms)  # should resemble true values after many runs
         self.action_counts = np.zeros(num_arms)
         self.epsilon = 0.1
 
@@ -17,7 +18,9 @@ class MultiArmedBandit:
 
     def update_action_value(self, action, reward):
         self.action_counts[action] += 1
-        self.estimated_action_values[action] += (reward - self.estimated_action_values[action]) / self.action_counts[action]
+        self.estimated_action_values[action] += (reward - self.estimated_action_values[action]) / self.action_counts[
+            action]
+
 
 def run_bandit(num_arms, num_steps):
     bandit = MultiArmedBandit(num_arms)
@@ -31,11 +34,14 @@ def run_bandit(num_arms, num_steps):
 
     return rewards
 
+
 if __name__ == "__main__":
-    num_arms = 5
+    num_arms = 10
     num_steps = 500
 
     rewards = run_bandit(num_arms, num_steps)
+
+    print(5 + 0.5 * np.random.randn(5))
 
     plt.plot(rewards)
     plt.xlabel('Steps')

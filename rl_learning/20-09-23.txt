@@ -1,0 +1,30 @@
+- Supervised learning requires a historical bank of correct answers.
+
+- For example, a long list of weather conditions in a defined geographical area. Trying to isolate
+one of these variables, such as rainfall. We feed all the other variables into the system and say
+"predict the rainfall". It can do this because it knows ground truth. Then, for future datasets with
+everything but the rainfall, we can say from our many snapshots that "with these 10 conditions being true,
+it is likely that the rainfall is Xmm based on historical snapshots".
+
+- Jargon is that all these variables are called "features" and the data points are called "labels".
+Each row in a spreadsheet, or DataFrame (stored in memory), is an "example".
+
+- Labels are the answer, or value we want to predict given the wide range of features.
+
+- Classification models output a boolean as to whether or not an item is likely to belong within a certain
+category. Can be binary results, or multiclass.
+
+- Unsupervised learning is given no correct answers, but tries to cluster data according to natural lines.
+It might end up with a chart (image1) that clusters phenomena we know to be similar in similar buckets.
+
+- Supervised learning deals with historical data better than unsupervised.
+
+- The best data needs to be large and high-diversity. For example, in a third-level course recommender
+system, you would need to have some kind of user taste profile, show the student examples of many types
+of course and ask a series of personality questions. Based on all the information the user gives,
+they are assigned to a cluster.
+
+- Training is just measuring the regret or loss between the model's prediction of the label, and the actual
+value of the label.
+
+- Update your weights in your model until you get warmer and warmer.

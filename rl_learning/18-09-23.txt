@@ -30,3 +30,8 @@ that could have been obtained by choosing the best action at each state within t
 importantly according to how many times this action has been taken. For example, if it was taken once
 with a high reward, then this is less valuable than if it was taken many times with a consistently
 high reward.
+
+- Recommending news articles, you serve a random article and in order to know whether or not the user
+appreciated the little piece of exploration and found reward in it, you have to categorise what a reward
+looks like. It could be a literal thumbs up or rating from the user, or it could be time spent browsing,
+etc. Seems closely related to A/B testing.
