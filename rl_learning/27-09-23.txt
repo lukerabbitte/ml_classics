@@ -1,0 +1,94 @@
+- Number of features in a batch of Google-scale can be enormous.
+
+- Rate of change is nothing more or less than the slope. First derivative of a function cannot magically
+tell us the "magnitude" of the change - just the rate of change and whether it is increasing or decreasing.
+
+- Multi-layered perceptron is an original layer reflecting the source data, for a low-res image could be pixels
+for example. Then there are a (seemingly arbitrary?) number of hidden layers of arbitrary size.
+
+- Lastly, there is an output (thought of as a column vector).
+
+- Classic gradient descent is computationally expensive, it takes all examples from a batch (many
+different handwritten scans) and only then performs an iteration (update on model weights).
+
+- Loss is only ever calculated based on the final output layer versus the correct answer. When it is a
+boolean, this is a single neuron.
+
+- The goal with the layered structure is that each layer is a breakdown of the larger problem. That one
+layer should be able to tell if the top half of the image has eyes, and within this layer there is another
+neural net that consists of multiple layers telling if the image has pupils, iris, etc. The emergent
+complexity of the final activation layer is just a sum of all the deep neural networks that activate it.
+
+- To find the activation of the next layer, use the sigmoid function which squishes a function into
+the range [0,1].
+
+- sig(w1a1 + w2a2 + ... + wnan - 10) ... the bias means that the weighted sums w1a1 are expected to be
+above this value.
+
+- w1 and a1 being high for a neuron in the next layer means that something was strongly recognised in the
+previous layer, and it is expected that that thing is a strong precursor for whatever the current neuron
+is meant to recognise (this could be something like "is there a loop in the top half of the image"
+
+- Bias says that it wasn't enough for a single neuron from the previous layer to have a strong link to
+this layer. A high bias means that for this neuron on the current layer to activate, many neurons from
+the previous layer had to have a strong link to it.
+
+- On the other hand, biases allow the relevant neuron to activate even when the weighted sum of inputs
+is zero.
+
+- Cost function is the average of the loss function for every example in an iteration. This is where
+the loss function is the squared difference between the ideal activation value and the given activation.
+
+- Describing one recursive step of backpropagation, it will look like the following. There is one neuron.
+We wish it had a higher activation, or lower. But we can't directly change the activation. All we can do
+is change all the weights from the previous layer that led to it, and its bias. So we look at the previous
+layer. We know that highly activated neurons of the previous layer hold more sway in affecting the neuron
+of the current layer. So for those, we wish it had a higher activation.
+
+- For each step, we want to change the weights associated with the most activated neurons of the previous
+layer, and we also want to change the activations themselves associated with the already stronger weights
+(which were random to begin with). So we have two desires. Changing the weights is easy, we calculate
+the loss function between the output neuron and the intended neuron, plot it over a weight, check if
+we need to inch left or right between 0 and 1 based on the gradient descent algorithm, multiply this
+weight by this learning rate in the right direction, and hey presto, we've updated one single weight.
+
+- However, changing the activation is harder, and we don't have direct access. If gradient descent is how
+to change the weights on each iteration, backpropagation is how to change the activation. It is more complex.
+
+- So for each neuron in the previous layer, we take a sum of the nudges of how much we want the neurons in
+the current layer to change. To figure out how much we want the activation of each neuron in the previous
+layer to change, we take a look at its weight bridging it to the neuron in the current layer. If the
+weight is strong, then yes we want that activation to change by quite a lot! We keep a list for each
+neuron in prev layer of how much we would love the activation to change based on the weights between it
+and everything in the final layer. So if there are 16 in prev layer and 8 in final layer, we keep a list
+of these desired activation changes that is 8 per neuron. 8x16=128. We have a matrix of 8x16 storing these
+wished activation changes. Then I guess we take the average of each row and that becomes the wished acti-
+vation change.
+
+- Recursively apply same process until we reach input layer. The idea that we need to change activations
+based on what
+
+- Which change to the weights and biases will cause the most efficient decrease of the overall cost
+function.
+
+- The chain rule in backpropagation considers
+1) The rate of change of the (w1a1 + b) sum with respect to the weight w1.
+2) The rate of change of the sigmoid function with respect to the (w1a1 + b) sum.
+3) The rate of change of the cost function with respect to this sigmoid function.
+
+- We ultimately want to find the rate of change of the cost function with respect to one of the single
+weights in our network. But to achieve this we must chain together all the steps between wiggling the
+individual weight and wiggling the cost function. We do this to find the ratio.
+
+- Backpropagation is how we find the "magnitude" of the descent we want to take towards the minimum!!!
+
+- For each neuron, we say how much we want each weight to change for that neuron to minimise loss.
+
+- This goes all the way back, adding at each step, until we can say we want the weight w0 to change, on
+average, by the magnitude 0.18, or -0.67, etc. We then sum this column vector of nudges to the existing
+weights, to find a new set of weights. This column vector is the downhill direction. We want to move in
+the negative gradient direction.
+
+
+
+
